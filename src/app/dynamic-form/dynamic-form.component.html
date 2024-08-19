@@ -1,79 +1,206 @@
+<!-- <div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of storeDataInTable">
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of storeDataInTable">
-          <td>{{item.name}}</td>
-          <td>{{item.email}}</td>
-          <td>{{item.phone}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <div>
-    <form [formGroup]="contactsForm" (ngSubmit)="submitForm()">
-  
-      <div formArrayName="contacts">
-        <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
-  
-          <label for="contact">Contact {{i + 1}}</label>
-          
-          <div>
-            <label for="name">Name</label>
-            <input type="text" formControlName="name" id="name">
-            <div class="text-danger" *ngIf="contact.get('name')?.invalid && contact.get('name')?.touched">
-              <div *ngIf="contact.get('name')?.errors?.['required']">Name is required</div>
-              <div *ngIf="contact.get('name')?.errors?.['minlength']">Name should be 4-15 characters</div>
-            </div>
-          </div><br>
-  
-          <div>
-            <label for="email">Email</label>
-            <input type="email" formControlName="email" id="email">
-            <div class="text-danger" *ngIf="contact.get('email')?.invalid && contact.get('email')?.touched">
-              <div *ngIf="contact.get('email')?.errors?.['required']">Email is required</div>
-              <div *ngIf="contact.get('email')?.errors?.['email']">Invalid email address</div>
-            </div>
-          </div><br>
-  
-          <div>
-            <label for="phone">Phone Number</label>
-            <input type="text" formControlName="phone" id="phone">
-            <div class="text-danger" *ngIf="contact.get('phone')?.invalid && contact.get('phone')?.touched">
-              <div *ngIf="contact.get('phone')?.errors?.['required']">Phone number is required</div>
-              <div *ngIf="contact.get('phone')?.errors?.['pattern']">Phone number must be 10 digits</div>
-            </div>
-          </div><br>
-  
-          <button type="button" (click)="removeContact(i, deleteConfirmation)">Delete</button>
-        </div>
+  <form [formGroup]="contactsForm" (ngSubmit)="submitForm()">
+
+    <div formArrayName="contacts">
+      <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
+
+        <label for="contact">Contact {{i + 1}}</label>
+
+        <div>
+          <label for="name">Name</label>
+          <input type="text" formControlName="name" id="name">
+          <div class="text-danger" *ngIf="contact.get('name')?.invalid && contact.get('name')?.touched">
+            <div *ngIf="contact.get('name')?.errors?.['required']">Name is required</div>
+            <div *ngIf="contact.get('name')?.errors?.['minlength']">Name should be 4-15 characters</div>
+          </div>
+        </div><br>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" formControlName="email" id="email">
+          <div class="text-danger" *ngIf="contact.get('email')?.invalid && contact.get('email')?.touched">
+            <div *ngIf="contact.get('email')?.errors?.['required']">Email is required</div>
+            <div *ngIf="contact.get('email')?.errors?.['email']">Invalid email address</div>
+          </div>
+        </div><br>
+
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="text" formControlName="phone" id="phone">
+          <div class="text-danger" *ngIf="contact.get('phone')?.invalid && contact.get('phone')?.touched">
+            <div *ngIf="contact.get('phone')?.errors?.['required']">Phone number is required</div>
+            <div *ngIf="contact.get('phone')?.errors?.['pattern']">Phone number must be 10 digits</div>
+          </div>
+        </div><br>
+
+        <button type="button" (click)="removeContact(i, deleteConfirmation)">Delete</button>
       </div>
-  
-      <button type="button" (click)="addContact()">Add Contact</button>
-      <button type="submit">Submit</button>
-  
-    </form>
+    </div>
+
+    <button type="button" (click)="addContact()">Add Contact</button>
+    <button type="submit">Submit</button>
+
+  </form>
+</div>
+
+
+<ng-template #deleteConfirmation let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirm Delete</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cancel')"></button>
   </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this contact?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Yes')">Yes, Delete</button>
+  </div>
+</ng-template> -->
+
+
+<!-- <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="contacts">
+    <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i" class="contact-group">
+      <!-- Contact Name 
+      <label>
+        Name:
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': contacts.at(i).get('name')?.invalid && contacts.at(i).get('name')?.touched}">
+        <div *ngIf="contacts.at(i).get('name')?.invalid && contacts.at(i).get('name')?.touched" class="text-danger">
+          Name is required.
+        </div>
+      </label>
+      <!-- Contact Email 
+      <label>
+        Email:
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': contacts.at(i).get('email')?.invalid && contacts.at(i).get('email')?.touched}">
+        <div *ngIf="contacts.at(i).get('email')?.invalid && contacts.at(i).get('email')?.touched" class="text-danger">
+          Invalid email address.
+        </div>
+      </label>
+      <!-- Contact Phone 
+      <label>
+        Phone:
+        <input type="text" formControlName="phone" class="form-control" [ngClass]="{'is-invalid': contacts.at(i).get('phone')?.invalid && contacts.at(i).get('phone')?.touched}">
+        <div *ngIf="contacts.at(i).get('phone')?.invalid && contacts.at(i).get('phone')?.touched" class="text-danger">
+          Phone is required.
+        </div>
+      </label>
+      
+      <!-- Update and Delete buttons 
+      <button type="button" class="btn btn-success" (click)="updateContact(i)">Update</button>
+      <button type="button" class="btn btn-danger" (click)="deleteContact(i, deleteConfirm)">Delete</button>
+      <hr>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="addContact()">Add Contact</button>
+  <button type="submit" class="btn btn-success">Submit All</button>
+</form>
+
+<!-- Confirmation Dialog 
+<ng-template #deleteConfirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Deletion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this contact?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('yes')">Yes</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('no')">No</button>
+  </div>
+</ng-template> -->
+
+
+<div>
+  <button type="button" class="btn btn-primary" (click)="addContact()">Add Contact</button>
   
-  <!-- Confirmation Modal -->
-  <ng-template #deleteConfirmation let-modal>
-    <div class="modal-header">
-      <h5 class="modal-title">Confirm Delete</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cancel')"></button>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contactsList; let i = index">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>
+          <button type="button" class="btn btn-success btn-sm" (click)="updatePhone(i)">Update Phone</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteContact(i, deleteConfirm)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Contact Form (Displayed when 'Add Contact' or 'Update Phone' is clicked) -->
+<div *ngIf="showForm" class="mt-3">
+  <form [formGroup]="contactForm" (ngSubmit)="submitContact()">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" formControlName="name" class="form-control form-control-sm" [ngClass]="{'is-invalid': contactForm.get('name')?.invalid && contactForm.get('name')?.touched}">
+      <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="text-danger">
+        Name is required.
+      </div>
     </div>
-    <div class="modal-body">
-      <p>Are you sure you want to delete this contact?</p>
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" class="form-control form-control-sm" [ngClass]="{'is-invalid': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}">
+      <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-danger">
+        Invalid email address.
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
-      <button type="button" class="btn btn-danger" (click)="modal.close('Yes')">Yes, Delete</button>
+    <div class="form-group">
+      <label>Phone:</label>
+      <input type="text" formControlName="phone" class="form-control form-control-sm" [ngClass]="{'is-invalid': contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched}">
+      <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched" class="text-danger">
+        Phone is required.
+      </div>
     </div>
-  </ng-template>
-  
+    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+  </form>
+</div>
+
+<!-- Confirmation Dialog -->
+<ng-template #deleteConfirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Deletion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this contact?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('yes')">Yes</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('no')">No</button>
+  </div>
+</ng-template>
