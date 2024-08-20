@@ -54,6 +54,7 @@ export class DynamicFormComponent {
         this.contactsList[this.editIndex] = this.contactForm.value;
       } else {
         this.contactsList.push(this.contactForm.value);
+        console.log(this.contactForm.value)
       }
       this.showForm = false;
     } else {
